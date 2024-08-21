@@ -10,7 +10,8 @@ function writeToLog(prvValue, usrInput, currentValue, operator) {
     currentValue: currentValue,
     operator:operator
   }
-  logs.push(log)
+  logs.push(log);
+  writeLogOnPage(log);
 }
 
 function getUserInput() {
@@ -20,19 +21,19 @@ function calc(operator) {
   const tempValue = currentValue;
   userInput = getUserInput();
   switch (operator) {
-    case "Add":
+    case "+":
       currentValue += userInput;
       break;
 
-    case "Subtract":
+    case "-":
       currentValue -= userInput;
       break;
 
-    case "Multiply":
+    case "*":
       currentValue *= userInput;
       break;
 
-    case "Divide":
+    case "/":
       currentValue /= userInput;
       break;
 
@@ -40,22 +41,10 @@ function calc(operator) {
       throw new Error("operator not found")
   }
   outputResult(currentValue, `${tempValue} ${operator} ${userInput}`);
+  writeToLog(tempValue, userInput, currentValue, operator)
 }
 
-function add() {
-  calc("Add");
-}
-
-function sub() {
-  calc("Subtract");
-}
-function mul() {
-  calc("Multiply");
-}
-function div() {
-  calc("Divide");
-}
-addBtn.addEventListener('click', add)
-subtractBtn.addEventListener('click', sub)
-multiplyBtn.addEventListener('click', mul)
-divideBtn.addEventListener('click', div)
+addBtn.addEventListener('click', ()=>calc("+"))
+subtractBtn.addEventListener('click', () => calc("-"))
+multiplyBtn.addEventListener('click', () => calc("*"))
+divideBtn.addEventListener('click', () => calc("/"))

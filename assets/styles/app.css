@@ -20,7 +20,7 @@ header {
 }
 
 #results,
-#calculator {
+#calculator, #logs {
   margin: 2rem auto;
   width: 40rem;
   max-width: 90%;
