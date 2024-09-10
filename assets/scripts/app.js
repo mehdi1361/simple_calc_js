@@ -3,21 +3,22 @@ let currentValue = defaultValue
 
 logs = []
 
-function writeToLog(prvValue, usrInput, currentValue, operator) {
+const writeToLog = (prvValue, usrInput, currentValue, operator) => {
   const log = {
     prvValue:prvValue,
     usrInput: usrInput,
     currentValue: currentValue,
     operator:operator
-  }
+  };
   logs.push(log);
   writeLogOnPage(log);
 }
 
-function getUserInput() {
+const getUserInput = () => {
   return  parseInt(usrInput.value)
-}
-function calc(operator) {
+};
+
+const calc = operator => {
   const tempValue = currentValue;
   userInput = getUserInput();
   switch (operator) {
@@ -44,7 +45,7 @@ function calc(operator) {
   writeToLog(tempValue, userInput, currentValue, operator)
 }
 
-addBtn.addEventListener('click', ()=>calc("+"))
-subtractBtn.addEventListener('click', () => calc("-"))
-multiplyBtn.addEventListener('click', () => calc("*"))
-divideBtn.addEventListener('click', () => calc("/"))
+addBtn.addEventListener('click', calc.bind(this, "+"));
+subtractBtn.addEventListener('click', calc.bind(this, "-"));
+multiplyBtn.addEventListener('click', calc.bind(this, "*"));
+divideBtn.addEventListener('click', calc.bind(this, "/"));
